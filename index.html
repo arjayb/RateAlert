@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RateAlert — Real-Time Currency Tracker</title>
+<meta name="description" content="Track a currency pair's live rate, watch its recent trend, and set a threshold alert for when it crosses a target.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="crt">
+    <header class="term-header">
+      <span class="term-title">RATEALERT<span class="cursor">_</span></span>
+      <span class="term-clock" id="clock">--:--:--</span>
+    </header>
+
+    <section class="watch-form">
+      <div class="pair-select">
+        <select id="base-currency">
+          <option value="USD" selected>USD</option>
+          <option value="PHP">PHP</option>
+          <option value="EUR">EUR</option>
+          <option value="GBP">GBP</option>
+          <option value="AED">AED</option>
+          <option value="SGD">SGD</option>
+        </select>
+        <span class="pair-slash">/</span>
+        <select id="quote-currency">
+          <option value="PHP" selected>PHP</option>
+          <option value="USD">USD</option>
+          <option value="EUR">EUR</option>
+          <option value="GBP">GBP</option>
+          <option value="AED">AED</option>
+          <option value="SGD">SGD</option>
+        </select>
+        <button id="watch-btn" type="button">WATCH</button>
+      </div>
+
+      <div class="alert-row">
+        <label for="threshold">Alert me when rate crosses</label>
+        <input id="threshold" type="number" step="0.0001" placeholder="e.g. 58.50">
+        <select id="threshold-dir">
+          <option value="above">above</option>
+          <option value="below">below</option>
+        </select>
+        <button id="arm-btn" type="button" disabled>ARM</button>
+      </div>
+      <p id="status-line" class="status-line">Select a pair and press WATCH to begin polling.</p>
+    </section>
+
+    <section id="ticker-panel" class="ticker-panel hidden">
+      <div class="rate-display">
+        <span class="rate-pair" id="rate-pair-label">—/—</span>
+        <span class="rate-value" id="rate-value">0.0000</span>
+        <span class="rate-delta" id="rate-delta">+0.00%</span>
+      </div>
+      <svg id="spark" viewBox="0 0 600 120" class="spark" role="img" aria-label="Recent rate trend"></svg>
+      <p class="spark-caption">last <span id="tick-count">0</span> ticks, polled every 15s while this tab is open</p>
+    </section>
+
+    <ul id="log" class="log"></ul>
+  </div>
+
+  <footer class="footer">
+    <p>Rates via a free public exchange-rate API. Alerts are in-page only (this is a static demo, not a push-notification service). <a href="https://github.com/arjayb/RateAlert" target="_blank" rel="noopener">Source</a></p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
